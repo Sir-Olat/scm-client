@@ -12,14 +12,7 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    Axios.get('/screams')
-      .then(res => {
-        // console.log(res.data);
-        this.setState({
-          screams: res.data
-        })
-      })
-      .catch(err => console.log(err));
+   
   }
 
   render() {
