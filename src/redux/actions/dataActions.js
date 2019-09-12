@@ -33,7 +33,7 @@ export const getScreams = () => (dispatch) => {
 };
 
 // Get a scream
-export const getSceam = (screamId) = (dispatch) => {
+export const getScream = (screamId) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
     .get(`/scream/${screamId}`)

@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-router-dom';
-import MyButton from '../utils/MyButton';
-import DeleteScream from './DeleteScream';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import MyButton from '../utils/MyButton';
+import DeleteScream from './DeleteScream';
+import ScreamDialog from './ScreamDialog';
 
-
+// Redux
 import { connect } from 'react-redux';
 import { likeScream, unlikeScream } from '../redux/actions/dataActions';
 
@@ -22,7 +23,6 @@ import ChatIcon from '@material-ui/icons/Chat';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
-
 const styles = {
   card: {
     display: 'flex',
@@ -30,11 +30,12 @@ const styles = {
     position: 'relative'
   },
   image: {
-    // minWidth: 200,
-    width: 150
+    minWidth: 200,
+    width: 150,
+    maxHeight: 200
   },
   content: {
-    padding: 25,
+    padding: 5,
     objectFit: 'cover'
   }
 };
@@ -64,6 +65,7 @@ class Scream extends Component {
     const { 
       classes, 
       scream: { 
+        screamId,
         body, 
         createdAt, 
         userImage, 
@@ -116,6 +118,7 @@ class Scream extends Component {
           >
             {userHandle}
           </Typography>
+          {deleteButton}
           <Typography 
             variant="body2" 
             color="textSecondary" 
@@ -136,7 +139,7 @@ class Scream extends Component {
             <ChatIcon color="primary" />
           </MyButton>
           <span>{commentCount} comments</span>
-          {deleteButton}
+          <ScreamDialog screamId={screamId} userHandle={userHandle} />
         </CardContent>
       </Card>
     )
