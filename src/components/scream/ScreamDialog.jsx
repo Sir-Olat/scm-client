@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import MyButton from '../utils/MyButton';
+import MyButton from '../../utils/MyButton';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
+import LikeButton from './LikeButton';
+import Commments from './Comment'
 
 // MUI
 import Dialog from '@material-ui/core/Dialog';
@@ -15,17 +17,15 @@ import Grid from '@material-ui/core/Grid';
 // Icons
 import UnfoldMore from '@material-ui/icons/UnfoldMore';
 import CloseIcon from '@material-ui/icons/Close';
+import ChatIcon from '@material-ui/icons/Chat';
+
 
 // Redux
 import { connect } from 'react-redux';
-import { getScream } from '../redux/actions/dataActions';
+import { getScream } from '../../redux/actions/dataActions';
 
 const styles = theme => ({
   ...theme.globalStyle,
-  invicibleSep: {
-    border: 'none',
-    margin: 4
-  },
   profileImage: {
     maxWidth: 150,
     height: 150,
@@ -38,6 +38,15 @@ const styles = theme => ({
   closeButton: {
     position: 'absolute',
     left: '90%'
+  },
+  expandButton: {
+    position: 'absolute',
+    left: '90%'
+  },
+  spinnerDiv: {
+    textAlign: 'center',
+    marginTop: 50,
+    marginBottom: 50
   }
 })
 
@@ -59,20 +68,24 @@ class ScreamDialog extends Component {
   render() {
     const { 
       classes, 
-      scream: { 
-        screamId, 
+      scream: {  
+        screamId,
         body, 
         createdAt, 
         likeCount, 
         commentCount, 
         userImage, 
-        userHandle
+        userHandle,
+        comments
       },
       UI: { loading }
     } = this.props;
 
     const dialogMarkup = loading ? (
-      <CircularProgress size={200} />
+      <div className={classes.spinnerDiv}>
+        <CircularProgress size={200} thickness={2}/>
+      </div>
+      
     ) : (
       <Grid container spacing={2}>
         <Grid item sm={5}>
@@ -95,13 +108,26 @@ class ScreamDialog extends Component {
           <Typography variant="body1">
             {body}
           </Typography>
+          <LikeButton screamId={screamId} />
+          <span>{likeCount} Likes</span>
+          <MyButton tip="comment">
+            <ChatIcon color="primary" />
+          </MyButton>
+          <span>{commentCount} comments</span>
         </Grid>
+        <hr className={classes.visibleSep} />
+        <Comments comments={comments} />
       </Grid>
     )
 
     return ( 
       <Fragment>
-        <MyButton onClick={this.handleOpen} tip="View scream" tipPlacement='top'>
+        <MyButton 
+          onClick={this.handleOpen} 
+          tipClassName={classes.expandButton}
+          tip="View scream" 
+          tipPlacement='top'
+        >
           <UnfoldMore color="primary" />
         </MyButton>
         <Dialog 
