@@ -122,7 +122,7 @@ class Profile extends Component {
           </div>
           <hr />
           <div className="profile-details">
-            <MuiLink component={Link} to={`users/${handle}`} color="primary" variant="h5">
+            <MuiLink component={Link} to={`user/${handle}`} color="primary" variant="h5">
               @{handle}
             </MuiLink>
             <hr />

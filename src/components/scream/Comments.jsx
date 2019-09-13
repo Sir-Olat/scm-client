@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 // MUI 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { connect } from 'react-redux';
 
 const styles = theme => ({
   ...theme.globalStyle,

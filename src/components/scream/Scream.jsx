@@ -81,7 +81,7 @@ class Scream extends Component {
           <Typography 
             variant="h5" 
             component={Link} 
-            to={`/users/${userHandle}`}
+            to={`/user/${userHandle}`}
             color="primary"
           >
             {userHandle}
@@ -107,7 +107,7 @@ class Scream extends Component {
             <ChatIcon color="primary" />
           </MyButton>
           <span>{commentCount} comments</span>
-          <ScreamDialog screamId={screamId} userHandle={userHandle} />
+          <ScreamDialog screamId={screamId} userHandle={userHandle} openDialog={this.props.openDIalog} />
         </CardContent>
       </Card>
     )
@@ -117,7 +117,8 @@ class Scream extends Component {
 Scream.propTypes = {
   user: PropTypes.object.isRequired,
   scream: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  openDIalog: PropTypes.bool
 }
 
 const mapStateToProps = state => ({
