@@ -9,6 +9,7 @@ import Profile from '../components/profile/Profile';
 
 import ScreamSkeleton from '../utils/ScreamSkeleton';
 
+
 class Home extends Component {
 
   componentDidMount(){

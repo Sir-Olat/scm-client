@@ -5,6 +5,7 @@ import Scream from '../components/scream/Scream';
 import Grid from '@material-ui/core/Grid';
 import StaticProfile from '../components/profile/StaticProfile';
 import ScreamSkeleton from '../utils/ScreamSkeleton';
+import ProfileSkeleton from '../utils/ProfileSkeleton';
 
 
 import { connect } from 'react-redux';
@@ -60,7 +61,7 @@ class User extends Component {
         </Grid>
         <Grid item sm={4} xs={12}>
           {this.state.profile === null ? (
-            <p>Loading profile...</p>
+            <ProfileSkeleton />
             ) : (<StaticProfile profile={this.state.profile} />) 
           }
         </Grid>
